@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": [
+      "node"
+    ],
+    // 💡 Added baseUrl to resolve paths relative to the project root
+    "baseUrl": "./",
+    // 💡 Added path alias for the environments folder
+    "paths": {
+      "@env/*": [
+        "src/environments/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
+  ]
+}

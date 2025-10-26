@@ -1,0 +1,19 @@
+<header>
+  <h6>{{ title() }}</h6>
+  <nav>
+    <!-- Conditional link for logged-in users -->
+    @if (authService.isAuthenticated()) {
+    <a routerLink="/add-product">Add Product</a>
+    }
+    @if (authService.isAuthenticated()) {
+    | <a routerLink="/products">Products</a>
+    }
+    <!-- Conditional display for Login / Logout -->
+    @if (authService.isAuthenticated()) {
+    | <button (click)="handleLogout()" class="nav-button">Logout</button>
+    } 
+  </nav>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>

@@ -1,0 +1,87 @@
+<!--
+    =============================================================================
+    CONTENT FOR: src/app/features/product/components/product-list/product-list.component.html
+    =============================================================================
+    -->
+<style>
+  /* CONTENT FOR: src/app/features/product/components/product-list/product-list.component.css
+      Note: Tailwind classes are generally preferred in the template HTML.
+      */
+  .card-shadow {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  }
+</style>
+
+<!-- Loading State -->
+    @if (loading()) {
+<div class="flex justify-center items-center h-48">
+  <svg class="animate-spin -ml-1 mr-3 h-10 w-10 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+  </svg>
+  <p class="text-lg text-gray-600">Loading products...</p>
+</div>
+    }
+
+<!-- Error State -->
+    @if (error()) {
+<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg" role="alert">
+  <p class="font-bold">Backend Connection Error</p>
+  <p>
+    Could not fetch products. Please ensure your Spring Boot backend is running on
+    <code class="font-mono bg-red-200 p-0.5 rounded">http://localhost:8080</code>
+    and the PostgreSQL configuration is correct.
+  </p>
+  <p class="mt-2 text-sm italic">Error: {{ error() }}</p>
+</div>
+    }
+
+<!-- Product Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  @for (product of products(); track product.id) {
+  <div class="bg-white p-6 rounded-xl card-shadow flex flex-col justify-between transition duration-300 hover:scale-[1.02]">
+    <div>
+      <h2 class="text-2xl font-semibold text-gray-800 mb-2">{{ product.name }}</h2>
+      <p class="text-sm text-gray-500 mb-4 h-12 overflow-hidden">{{ product.description }}</p>
+    </div>
+
+    <div class="mt-4 pt-4 border-t border-gray-100">
+      <div class="flex justify-between items-center mb-3">
+        <span class="text-3xl font-bold text-indigo-600">
+          {{ product.price | currency:'USD' }}
+        </span>
+        <span class="px-3 py-1 text-xs font-medium rounded-full"
+              [class.bg-green-100]="product.stockQuantity > 50"
+              [class.text-green-800]="product.stockQuantity > 50"
+              [class.bg-yellow-100]="product.stockQuantity <= 50 && product.stockQuantity > 0"
+              [class.text-yellow-800]="product.stockQuantity <= 50 && product.stockQuantity > 0"
+              [class.bg-red-100]="product.stockQuantity === 0"
+              [class.text-red-800]="product.stockQuantity === 0">
+          Stock: {{ product.stockQuantity }}
+        </span>
+      </div>
+
+      <button class="w-full py-3 mt-2 font-semibold rounded-lg transition duration-300 disabled:opacity-50"
+              [disabled]="product.stockQuantity === 0"
+              [class.bg-indigo-600]="product.stockQuantity > 0"
+              [class.hover:bg-indigo-700]="product.stockQuantity > 0"
+              [class.text-white]="product.stockQuantity > 0"
+              [class.bg-gray-200]="product.stockQuantity === 0"
+              [class.text-gray-500]="product.stockQuantity === 0"
+              (click)="deleteProduct(product)">
+        @if (product.stockQuantity > 0) {
+        Remove
+        } @else {
+        Out of Stock
+        }
+      </button>
+    </div>
+  </div>
+  } @empty {
+  @if (!loading() && !error()) {
+  <div class="lg:col-span-3 text-center py-10 bg-white rounded-xl card-shadow w-full">
+    <p class="text-xl text-gray-500">No products found in the catalog.</p>
+  </div>
+  }
+  }
+</div>
