@@ -1,0 +1,89 @@
+.nav-button {
+  @apply px-4 py-2 rounded-lg text-white font-bold transition-colors shadow-md;
+}
+
+/* Angular Router Link Active (Mock class) */
+.nav-item.active-link {
+  @apply bg-indigo-700;
+}
+
+.mobile-nav-item.active-link {
+  @apply bg-indigo-100 text-indigo-700;
+}
+
+.nav-item {
+  @apply text-gray-300 hover:text-white transition-colors p-1;
+}
+
+.mobile-nav-item {
+  @apply p-3 rounded-lg hover:bg-gray-100 transition-colors text-lg;
+}
+
+header {
+/*  background-color: cadetblue;  */
+/*  margin: 0px auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;*/
+/*height:fit-content;*/
+height:100px;
+}
+
+mat-toolbar {
+  border: 1px solid #ccc;
+  padding: 1px 1px 1px 1px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-family: cursive;
+  height:fit-content;
+}
+
+.main{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto;
+    border: solid;
+    padding: 1px 5px 1px 5px;
+    margin: 2px;
+    border-radius: 10px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+
+.sidenav-container {
+  /* This is crucial to make the Sidenav fill the entire page */
+  width: 100%;
+  height: 100vh;
+}
+
+.menu-content {
+  padding: 20px;
+  
+  /* Make menu items take full width for better clicking */
+  display: flex;
+  flex-direction: column;
+}
+
+  .menu-content a {
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+/*.main-header {
+  padding: 10px;
+  background: #f4f4f4;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+}*/
+
+/*.app-main-content {
+  padding: 20px;
+}*/
+
+span{
+    font-size:medium;
+}

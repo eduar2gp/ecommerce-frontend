@@ -1,1 +1,23 @@
-<p>product-card works!</p>
+<ng-container *ngIf="productData$ | async as product">
+
+  <h3>Product Details</h3>
+
+  <form #productForm="ngForm" (ngSubmit)="saveProduct(product)">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput name="name" [(ngModel)]="product.name" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput name="description" [(ngModel)]="product.description"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
+      Save Changes
+    </button>
+
+  </form>
+
+</ng-container>

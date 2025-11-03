@@ -1,0 +1,19 @@
+<mat-list style="background-color:burlywood">
+
+  @for (provider of providers(); track provider.id) {
+  <mat-list-item (click)="onClick(provider)" class="main" style="background-color:beige; height=200px" >
+    
+    
+      <img src="http://localhost:8080{{provider.profileImageUrl}}" width="50px" height="50px" />
+   
+
+    
+      <!--<div matListItemTitle>{{provider.name}}</div>
+      <div matListItemTitle>{{provider.email}}</div>-->
+   
+
+  </mat-list-item>
+
+  }
+
+</mat-list>

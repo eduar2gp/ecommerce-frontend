@@ -1,0 +1,15 @@
+<ng-container *ngIf="providerData$ | async as provider">
+
+  <h3>Provider Details</h3>
+
+  <strong>Name: {{ provider.name }}</strong>
+  <p>ID: {{ provider.id }}</p>
+  <p>email: {{ provider.email }}</p>
+  <img src="http://localhost:8080{{provider.profileImageUrl}}" width="100px" height="100px" />
+
+
+</ng-container>
+
+<ng-container *ngIf="!(providerData$ | async)">
+  <p>Loading provider data...</p>
+</ng-container>

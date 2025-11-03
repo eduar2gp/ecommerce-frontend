@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 // 💡 Correctly import the service and interface from the new file
 import { ProductsService } from '../../../core/services/products.service';
 import { Product } from '../../../model/product.model'
+import { Router } from '@angular/router';
+import { DataService } from '../../../core/services/data.service';
 
 @Component({
   selector: 'app-products-list',
@@ -21,6 +23,11 @@ export class ProductListComponent implements OnInit {
   products = signal<Product[]>([]);
   loading = signal(false);
   error = signal<string | null>(null);
+
+  constructor(private dataService: DataService, private router: Router) {
+    // 2. Assign the service's Observable to the local variable
+    //this.dataService = dataServic;
+  }
 
   ngOnInit(): void {
     this.fetchProducts();
@@ -55,6 +62,13 @@ export class ProductListComponent implements OnInit {
   addToCart(product: Product): void {
     console.log(`[ACTION] Added ${product.name} (ID: ${product.id}) to the cart!`);
     // Toast/Snackbar UI implementation would go here instead of console.log
+  }
+
+
+  editProduct(product: Product) {
+    console.log(product.name)
+    this.dataService.updateProduct(product)
+    this.router.navigate(['/edit-product']);
   }
 
   deleteProduct(product: Product) {
