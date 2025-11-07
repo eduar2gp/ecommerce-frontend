@@ -11,6 +11,7 @@ interface LoginCredentials {
 }
 
 interface LoginResponse {
+  userId: string;
   jwtToken: string; // Assuming the JWT is returned in a 'token' field
 }
 
@@ -26,6 +27,7 @@ export class AuthService {
   private fullUrl = `${environment.baseApiUrl}${this.LOGIN_ENDPOINT}`;
 
   private readonly TOKEN_KEY = 'authToken';
+  private readonly USER_ID = 'userId';
 
   // 💡 New: Signal to track authentication status
   public isAuthenticated = signal(false);
@@ -40,17 +42,18 @@ export class AuthService {
   login(credentials: LoginCredentials): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(this.fullUrl, credentials).pipe(
       tap(response => {
-        this.storeToken(response.jwtToken);        
+        this.storeToken(response.jwtToken, response.userId);        
       })
     );
   }
 
   // --- Utility Methods (Platform-protected) ---
 
-  private storeToken(token: string): void {
+  private storeToken(token: string, userId: string): void {
     if (isPlatformBrowser(this.platformId)) {
       console.log(`saving token ${token}`)
       localStorage.setItem(this.TOKEN_KEY, token);
+      localStorage.setItem(this.USER_ID, userId);
       this.currentToken.set(token);
       this.isAuthenticated.set(true);
     }

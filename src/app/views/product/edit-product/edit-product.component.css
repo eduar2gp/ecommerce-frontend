@@ -3,3 +3,7 @@ form {
   flex-direction: column;
   align-items: center;
 }
+
+img {
+  object-fit: cover;
+}

@@ -1,19 +1,11 @@
-<mat-list style="background-color:burlywood">
-
+<ul class="product-list">
   @for (provider of providers(); track provider.id) {
-  <mat-list-item (click)="onClick(provider)" class="main" style="background-color:beige; height=200px" >
-    
-    
-      <img src="http://localhost:8080{{provider.profileImageUrl}}" width="50px" height="50px" />
-   
-
-    
-      <!--<div matListItemTitle>{{provider.name}}</div>
-      <div matListItemTitle>{{provider.email}}</div>-->
-   
-
-  </mat-list-item>
-
+  <li class="product-item" (click)="onClick(provider)">
+    <img src="http://localhost:8080{{provider.profileImageUrl}}" alt="Product Image A" class="product-image">
+    <div class="product-details">
+      <h3 class="product-name">{{provider.name}}</h3>
+      <p class="product-description"> {{provider.email}} </p>
+    </div>
+  </li>
   }
-
-</mat-list>
+</ul>

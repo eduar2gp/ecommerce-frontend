@@ -16,7 +16,7 @@ export class ProvidersService {
   // 💡 Note: Your previous products endpoint was '/api/v1/products'. 
   // If BASE_API_URL already ends with '/api/v1', this should just be '/products'.
   // I will assume BASE_API_URL includes the version path and correct the endpoint:
-  private PRODUCTS_ENDPOINT = '/api/v1/providers';
+  private PROVIDERS_ENDPOINT = '/api/v1/providers';
 
   /**
    * Fetches the list of products from the backend API.
@@ -24,8 +24,23 @@ export class ProvidersService {
    * @returns An Observable array of Product objects.
    */
   getProviders(): Observable<Provider[]> {
-    const fullUrl = `${this.BASE_API_URL}${this.PRODUCTS_ENDPOINT}`;
+    const fullUrl = `${this.BASE_API_URL}${this.PROVIDERS_ENDPOINT}`;
     return this.http.get<Provider[]>(fullUrl);
+  }
+
+  updateProvider(providerId: number, provider: Provider): Observable<Provider> {
+    const fullUrl = `${this.BASE_API_URL}${this.PROVIDERS_ENDPOINT}/${providerId}`;
+    return this.http.put<Provider>(fullUrl, provider);
+  }
+  
+  updateProviderImage(providerId: number, formData: FormData): Observable<Provider> {
+    const fullUrl = `${this.BASE_API_URL}${this.PROVIDERS_ENDPOINT}/${providerId}/image`;    
+    return this.http.post<Provider>(fullUrl, formData);
+  }
+
+  createProvider(provider: Provider): Observable<Provider> {
+    const fullUrl = `${this.BASE_API_URL}${this.PROVIDERS_ENDPOINT}`;
+    return this.http.post<Provider>(fullUrl, provider);
   }
   
 }

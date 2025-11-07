@@ -4,4 +4,5 @@ name: string;
 description: string;
 price: number;
 stockQuantity: number;
+productImageUrl?: string;
 }

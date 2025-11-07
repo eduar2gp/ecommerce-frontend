@@ -34,6 +34,9 @@
         | <a routerLink="/products">Products</a>
         }
         @if (authService.isAuthenticated()) {
+        | <a routerLink="/add-provider">Add Provider</a>
+        }
+        @if (authService.isAuthenticated()) {
         | <a routerLink="/providers">Providers</a>
         }
       </nav>
@@ -44,9 +47,9 @@
           <router-outlet></router-outlet>
         </main>
       </div>
-      <div style="background-color:beige">
+      <!--<div style="background-color:beige">
         <p>Content on the right</p>
-      </div>
+      </div>-->
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

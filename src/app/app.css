@@ -40,7 +40,7 @@ mat-toolbar {
 
 .main{
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: auto;
     border: solid;
     padding: 1px 5px 1px 5px;

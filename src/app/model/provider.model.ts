@@ -3,6 +3,6 @@ export interface Provider {
   name: string;
   email: string;
   phone: string;
-  userId?: number;
+  userId?: string;
   profileImageUrl?: string;
 }

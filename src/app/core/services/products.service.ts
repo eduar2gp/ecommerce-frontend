@@ -59,6 +59,23 @@ export class ProductsService {
     return this.http.put<Product>(fullUrl, product);
   }
 
+
+  // Service method to send the multipart/form-data request
+  saveProductWithImage(productId: number, formData: FormData): Observable<Product> {
+    const fullUrl = `${this.BASE_API_URL}${this.PRODUCTS_ENDPOINT}/${productId}/image`;
+    // The key is that you pass the FormData object directly.
+    // HttpClient automatically sets the Content-Type to multipart/form-data
+    // and correctly includes the boundary identifier.
+
+    // Assuming your backend POST endpoint is just '/api/v1/products' 
+    // and handles creation/update based on the form data content.
+    // If you are updating an existing product, you might use PUT/PATCH with an ID:
+    // return this.http.put<Product>(`${this.apiUrl}/${productId}`, formData);
+
+    // Based on your backend logic (which expects form data for creation), let's use POST:
+    return this.http.post<Product>(fullUrl, formData);
+  }
+
   /**
    * Sends a DELETE request to remove a product.
    * Assumes the API endpoint is `/api/v1/products/{id}`.

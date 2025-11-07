@@ -21,6 +21,7 @@ export class EditProductComponent {
 
   // FIX: Allow 'null' in the Observable type to match the DataService.
   productData$!: Observable<Product | null>; // 👈 Changed to include | null
+  selectedFile: File | null = null;
 
   private productsService = inject(ProductsService);
 
@@ -28,10 +29,18 @@ export class EditProductComponent {
     this.productData$ = this.dataService.currentProduct;
   }
 
+  // Method to capture the selected file
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      console.log('file selected')
+    }
+  }
+
   // Method called when the form is submitted
   saveProduct(product: Product): void {
     console.log('Submitting product:', product);
-
     // 1. Call the service method, passing the product ID and the entire product object.
     this.productsService.updateProduct(product.id!, product)
       // 2. Subscribe to the Observable to trigger the HTTP request and handle the result.
@@ -39,23 +48,35 @@ export class EditProductComponent {
         next: (updatedProduct: Product) => {
           // This runs if the PUT request is successful (HTTP 200/204)
           console.log('Product updated successfully:', updatedProduct);
-          alert(`Product ${updatedProduct.name} updated!`);
-
+          //alert(`Product ${updatedProduct.name} updated!`);
           // Optional: Perform additional actions like refreshing the list or navigating.
+        
+          if (this.selectedFile) {
+            const formData = new FormData();
+            formData.append('file', this.selectedFile, this.selectedFile.name);
+            this.productsService.saveProductWithImage(product.id!, formData).subscribe({
+              next: (updatedProduct: any) => {
+                console.log('Product image saved successfully!', updatedProduct);
+                // Handle success (e.g., navigate, show notification)
+              },
+              error: (err: any) => {
+                console.error('Error saving product:', err);
+                // Handle error
+              }
+            });
+          }
+
         },
-        error: (error) => {
+        error: (error: any) => {
           // This runs if the PUT request fails (e.g., HTTP 4xx or 5xx)
           console.error('Error updating product:', error);
           alert('Failed to save product. Check the console for details.');
-
           // Optional: Display a user-friendly error message.
         },
         complete: () => {
           // This runs when the Observable completes (after next or error)
           console.log('Product update stream finished.');
         }
-      });
-    
+      });    
   }
-
 }
