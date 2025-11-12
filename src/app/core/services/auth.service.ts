@@ -2,7 +2,7 @@ import { Injectable, inject, PLATFORM_ID, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable, tap } from 'rxjs';
-import { environment } from '@env/environment';
+import { environment } from '../../../app/environments/environment';
 
 // Define interfaces for clarity
 interface LoginCredentials {
@@ -23,6 +23,7 @@ export class AuthService {
   private platformId = inject(PLATFORM_ID);  
   
   private LOGIN_ENDPOINT = '/api/v1/auth/login';
+  private GOOGLE_LOGIN_ENDPOINT = '/api/v1/auth/google/login';
 
   private fullUrl = `${environment.baseApiUrl}${this.LOGIN_ENDPOINT}`;
 
@@ -42,6 +43,15 @@ export class AuthService {
   login(credentials: LoginCredentials): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(this.fullUrl, credentials).pipe(
       tap(response => {
+        this.storeToken(response.jwtToken, response.userId);        
+      })
+    );
+  }
+
+  googleLogin(credentials: any): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${environment.baseApiUrl}${this.GOOGLE_LOGIN_ENDPOINT}`, credentials).pipe(
+      tap(response => {
+        console.log('response: ' + response)
         this.storeToken(response.jwtToken, response.userId);        
       })
     );
