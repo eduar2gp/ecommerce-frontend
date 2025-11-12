@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // 👈 Import FormsModule for ngModel
 import { AuthService } from '../../core/services/auth.service'; // 👈 Import the new service
 import { isPlatformBrowser } from '@angular/common';
-import { environment } from '../../../app/environments/environment';
+import { environment } from '@env/environment'
 
 declare const google: any;
 

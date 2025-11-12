@@ -2,7 +2,7 @@ import { Injectable, inject, PLATFORM_ID, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable, tap } from 'rxjs';
-import { environment } from '../../../app/environments/environment';
+import { environment } from '@env/environment'
 
 // Define interfaces for clarity
 interface LoginCredentials {

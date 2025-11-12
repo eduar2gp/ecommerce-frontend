@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http'; // 💡 Removed HttpHeaders, 
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service'; // 💡 Keeping the import, but removing the injection/use
 import { Product } from '../../model/product.model'
-import { environment } from '../../../app/environments/environment';
+import { environment } from '@env/environment'
 
 /**
  * Defines the structure for a product object.
