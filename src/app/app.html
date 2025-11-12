@@ -18,12 +18,20 @@
         </button>
         <span>{{ title() }}</span>
         <span class="example-spacer"></span>
-        <button matIconButton class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <!--<button matIconButton class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
           <mat-icon>login</mat-icon>
+        </button>-->
+        <!--<button matIconButton class="example-icon" aria-label="Example icon-button with share icon" >
+    <mat-icon>share</mat-icon>
+  </button>-->
+        <button matIconButton class="demo-section">          
+          <mat-icon [matBadge]="orderCount$ | async">home</mat-icon>
+          <!-- Include text description of the icon's meaning for screen-readers -->
+          <!--<span class="cdk-visually-hidden">
+            Example with a home icon with overlaid badge showing the number 15
+          </span>-->
         </button>
-        <button matIconButton class="example-icon" aria-label="Example icon-button with share icon" >
-          <mat-icon>share</mat-icon>
-        </button>
+
       </mat-toolbar>
       <nav>
         <!-- Conditional link for logged-in users -->
@@ -38,6 +46,9 @@
         }
         @if (authService.isAuthenticated()) {
         | <a routerLink="/providers">Providers</a>
+        }
+        @if (authService.isAuthenticated()) {
+        | <a routerLink="/orders">Orders</a>
         }
       </nav>
     </header>
