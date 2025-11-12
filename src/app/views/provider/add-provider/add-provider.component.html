@@ -3,7 +3,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Name</mat-label>
-    <input matInput formControlName="name" type="text" required>
+    <input matInput formControlName="name" type="text" required  [(ngModel)]="newProvider.name">
     @if (nameControl.hasError('required') && nameControl.touched) {
     <mat-error>Name is required.</mat-error>
     }
@@ -15,7 +15,7 @@
            type="email"
            email
            required
-           formControlName="email">
+           formControlName="email" [(ngModel)]="newProvider.email">
 
     @if (emailControl.touched && emailControl.errors?.['required']) {
     <mat-error>Email is required.</mat-error>
@@ -27,7 +27,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Phone Number</mat-label>
-    <input matInput formControlName="phoneNumber" type="number" placeholder="e.g. (555) 555-1234">
+    <input matInput formControlName="phoneNumber" type="number" placeholder="e.g. (555) 555-1234" [(ngModel)]="newProvider.phone">
 
     @if (phoneControl.hasError('required')) {
     <mat-error>Phone number is required</mat-error>

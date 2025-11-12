@@ -55,18 +55,12 @@ export class AddProviderComponent implements OnInit {
   get phoneControl() {
     return this.phoneForm.get('phoneNumber')!;
   }
-  saveProvider() {
-    // If localStorage.getItem returns null, it falls back to undefined,
-    // which satisfies the string | undefined type.
 
+  saveProvider() {    
     if (this.phoneForm.valid) {
-
       this.newProvider.userId = localStorage.getItem("userId") ?? undefined;
       this.providersService.createProvider(this.newProvider).subscribe({
-        next: (response) => {
-          console.log('saved ' + response)
-
-
+        next: (response) => {          
           if (this.selectedFile) {
             const formData = new FormData();
             formData.append('file', this.selectedFile, this.selectedFile.name);
