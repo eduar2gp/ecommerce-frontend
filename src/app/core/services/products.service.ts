@@ -2,8 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; // 💡 Removed HttpHeaders, as interceptor handles it
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service'; // 💡 Keeping the import, but removing the injection/use
-import { environment } from '@env/environment';
 import { Product } from '../../model/product.model'
+import { environment } from '../../../app/environments/environment';
 
 /**
  * Defines the structure for a product object.

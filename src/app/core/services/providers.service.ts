@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; // 💡 Removed HttpHeaders, as interceptor handles it
 import { Observable } from 'rxjs';
-import { environment } from '@env/environment';
 import { Provider } from '../../model/provider.model'
+import { environment } from '../../../app/environments/environment';
 
 @Injectable({
   providedIn: 'root'
